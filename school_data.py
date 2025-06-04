@@ -106,9 +106,9 @@ def generate_school_stats(school_code, dict):
     yearly_totals = []
     total_ten_year = 0
 
-    print(f"Mean enrollment for Grade 10: {mean_grade_10} ")
-    print(f"Mean enrollment for Grade 11: {mean_grade_11} ")
-    print(f"Mean enrollment for Grade 12: {mean_grade_12} ")
+    print(f"Mean enrollment for Grade 10: {mean_grade_10}")
+    print(f"Mean enrollment for Grade 11: {mean_grade_11}")
+    print(f"Mean enrollment for Grade 12: {mean_grade_12}")
     print(f"Highest enrollment for a single grade: {highest_enrollment}")
     print(f"Lowest enrollment for a single grade: {lowest_enrollment}")
 
