@@ -138,9 +138,36 @@ def generate_school_stats(school_code, dict):
         print("No enrollments over 500.")
 
 
+def generate_all_stats():
+    """
+    Generates and prints general statistics for all schools across all years.
+
+    Returns:
+        None: Prints statistics directly to console.
+    """
+    # Calculate mean enrollment in 2013 (first year, index 0)
+    mean_2013 = int(np.floor(np.nanmean(threeD_stack_array[0, :, :])))
+
+    # Calculate mean enrollment in 2022 (last year, index 9)
+    mean_2022 = int(np.floor(np.nanmean(threeD_stack_array[9, :, :])))
+
+    # Calculate total graduating class of 2022 (Grade 12 in 2022)
+    graduating_2022 = int(np.floor(np.nansum(threeD_stack_array[9, :, 2])))
+
+    # Find highest and lowest enrollment for a single grade across all schools and years
+    highest_single_grade = int(np.floor(np.nanmax(threeD_stack_array)))
+    lowest_single_grade = int(np.floor(np.nanmin(threeD_stack_array)))
+
+    # Print all general statistics
+    print(f"Mean enrollment in 2013: {mean_2013}")
+    print(f"Mean enrollment in 2022: {mean_2022}")
+    print(f"Total graduating class of 2022: {graduating_2022}")
+    print(f"Highest enrollment for a single grade: {highest_single_grade}")
+    print(f"Lowest enrollment for a single grade: {lowest_single_grade}")
+
+
 def main():
     print("ENSF 692 School Enrollment Statistics")
-
 
     # Print Stage 1 requirements here
 print(f"Shape of full data array: {threeD_stack_array.shape}")
@@ -167,6 +194,7 @@ generate_school_stats(selected_valid_school, school_dict)
 # Print Stage 3 requirements here
 print("\n***General Statistics for All Schools***\n")
 
+generate_all_stats()
 
 if __name__ == '__main__':
     main()
