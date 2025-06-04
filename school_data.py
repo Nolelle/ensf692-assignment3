@@ -6,10 +6,6 @@
 # You may import any modules from the standard Python library.
 # Remember to include docstrings and comments.
 
-
-from multiprocessing import Value
-from tkinter import W
-
 import numpy as np
 
 from given_data import (year_2013, year_2014, year_2015, year_2016, year_2017,
@@ -170,31 +166,32 @@ def main():
     print("ENSF 692 School Enrollment Statistics")
 
     # Print Stage 1 requirements here
-print(f"Shape of full data array: {threeD_stack_array.shape}")
-print(f"Dimensions of full data array: {threeD_stack_array.ndim}")
+    print(f"Shape of full data array: {threeD_stack_array.shape}")
+    print(f"Dimensions of full data array: {threeD_stack_array.ndim}")
 
-# Prompt for user input
-selected_valid_school = None
+    # Prompt for user input
+    selected_valid_school = None
 
-while selected_valid_school is None:
-    try:
-        user_input = input(
-            "Please enter the high school name or school code: ")
-        selected_valid_school = validate_school_input(user_input, school_dict)
-    except ValueError as e:
-        print("You must enter a valid school name or code.")
+    while selected_valid_school is None:
+        try:
+            user_input = input(
+                "Please enter the high school name or school code: ")
+            selected_valid_school = validate_school_input(
+                user_input, school_dict)
+        except ValueError as e:
+            print("You must enter a valid school name or code.")
 
-# Print Stage 2 requirements here
-print("\n***Requested School Statistics***\n")
-print(
-    f"School Name: {school_dict[selected_valid_school]}, School Code: {selected_valid_school}")
-generate_school_stats(selected_valid_school, school_dict)
+    # Print Stage 2 requirements here
+    print("\n***Requested School Statistics***\n")
+    print(
+        f"School Name: {school_dict[selected_valid_school]}, School Code: {selected_valid_school}")
+    generate_school_stats(selected_valid_school, school_dict)
 
+    # Print Stage 3 requirements here
+    print("\n***General Statistics for All Schools***\n")
 
-# Print Stage 3 requirements here
-print("\n***General Statistics for All Schools***\n")
+    generate_all_stats()
 
-generate_all_stats()
 
 if __name__ == '__main__':
     main()
