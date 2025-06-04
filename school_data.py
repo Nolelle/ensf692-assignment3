@@ -50,12 +50,11 @@ def validate_school_input(input, dict):
     Validates user input for a school name or code against known school data.
 
     Args:
-        user_input (str): The raw input string from the user.
-        school_data_map (dict): A dictionary mapping school names/codes to
-                                 their canonical identifiers (e.g., codes).
+        input (str): The raw input string from the user.
+        dict (dict): Dictionary mapping school codes to school names.
 
     Returns:
-        str: The valid school code if found.
+        int: The valid school code if found.
 
     Raises:
         ValueError: If the input does not correspond to a valid school.
@@ -84,7 +83,7 @@ def generate_school_stats(school_code, dict):
 
     Args:
         school_code (int): The numeric code identifying the school.
-        school_dict (dict): Dictionary mapping school codes to school names.
+        dict (dict): Dictionary mapping school codes to school names.
 
     Returns:
         None: Prints statistics directly to console.
@@ -95,7 +94,7 @@ def generate_school_stats(school_code, dict):
     school_codes = list(school_dict.keys())
     school_index = school_codes.index(school_code)
 
-    school_data = threeD_stack_array[:, school_index, :]  # [10,3]
+    school_data = threeD_stack_array[:, school_index, :].view()  # [10,3]
 
     mean_grade_10 = int(np.floor(np.nanmean(school_data[:, 0])))
     mean_grade_11 = int(np.floor(np.nanmean(school_data[:, 1])))
@@ -141,20 +140,18 @@ def generate_all_stats():
     Returns:
         None: Prints statistics directly to console.
     """
-    # Calculate mean enrollment in 2013 (first year, index 0)
+    # (first year, index 0)
     mean_2013 = int(np.floor(np.nanmean(threeD_stack_array[0, :, :])))
 
-    # Calculate mean enrollment in 2022 (last year, index 9)
+    # (last year, index 9)
     mean_2022 = int(np.floor(np.nanmean(threeD_stack_array[9, :, :])))
 
-    # Calculate total graduating class of 2022 (Grade 12 in 2022)
+    # (Grade 12 in 2022)
     graduating_2022 = int(np.floor(np.nansum(threeD_stack_array[9, :, 2])))
 
-    # Find highest and lowest enrollment for a single grade across all schools and years
     highest_single_grade = int(np.floor(np.nanmax(threeD_stack_array)))
     lowest_single_grade = int(np.floor(np.nanmin(threeD_stack_array)))
 
-    # Print all general statistics
     print(f"Mean enrollment in 2013: {mean_2013}")
     print(f"Mean enrollment in 2022: {mean_2022}")
     print(f"Total graduating class of 2022: {graduating_2022}")
@@ -163,6 +160,15 @@ def generate_all_stats():
 
 
 def main():
+    """
+    Main function that orchestrates the school enrollment statistics program.
+
+    Displays array information, prompts for user input, validates the input,
+    and generates both school-specific and general statistics.
+
+    Returns:
+        None: Prints results directly to console.
+    """
     print("ENSF 692 School Enrollment Statistics")
 
     # Print Stage 1 requirements here
