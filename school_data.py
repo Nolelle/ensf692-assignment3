@@ -109,8 +109,8 @@ def generate_school_stats(school_code, dict):
     print(f"Mean enrollment for Grade 10: {mean_grade_10} ")
     print(f"Mean enrollment for Grade 11: {mean_grade_11} ")
     print(f"Mean enrollment for Grade 12: {mean_grade_12} ")
-    print(f"Highest enrolllment for a single grade: {highest_enrollment}")
-    print(f"Lowest enrolllment for a single grade: {lowest_enrollment}")
+    print(f"Highest enrollment for a single grade: {highest_enrollment}")
+    print(f"Lowest enrollment for a single grade: {lowest_enrollment}")
 
     for year in range(10):
         year_total = int(np.floor(np.nansum(school_data[year, :])))
@@ -128,7 +128,7 @@ def generate_school_stats(school_code, dict):
     if len(over_500_values):
         median_over_500 = int(np.floor(np.median(over_500_values)))
         print(
-            f"For all enrollments over 500, the median values was: {median_over_500}")
+            f"For all enrollments over 500, the median value was: {median_over_500}")
     else:
         print("No enrollments over 500.")
 
